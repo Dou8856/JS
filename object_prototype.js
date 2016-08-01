@@ -1,8 +1,9 @@
 //Define the Person constructor
-var Person = function(firstName) {
+function Person(firstName) {
     this.firstName = firstName;
 };
 
+//Add a method to the Person prototype
 Person.prototype.sayHello = function() {
     console.log("Hello Person");
 }
@@ -15,6 +16,42 @@ function Student(firstName, subject) {
     this.subject  = subject;
 }
 
+//To create a new object from the same prototype by using "new" keyword
+var emily = new Person("Emily");
+
+//add a new properties to an existing object
+//emily.lastName = "He";
+
+//Adding a method to an Object
+emily.sum = function(a, b) {
+    c = a+b;
+    console.log("sum is = " + c);
+};
+
+
+//Add properties to a Prototype
+//You cannot add a new property to a prototype as you add a new property to 
+//existing object, because the prototype is not an existing object
+//One way: to add methods and properties in the constructor
+//Another way: using "prototype" property
+//Person.prototype.lastName = "X";
+Person.prototype.addLastName = function(lastName) {
+    console.log("default lastname = " + this.lastName);
+    this.lastName = lastName;
+    console.log("new lastname = " + this.lastName);
+}
+
+console.log(emily);
+console.log(Person);
+console.log(Person.prototype);
+Person.staticSum = function(a,b){
+    c = a+b;
+    console.log("Person staticSum = " + c);
+};
+
+emily.sum(1,2);
+emily.addLastName("He");
+Person.staticSum(2,9);
 
 Student.prototype = Object.create(Person.prototype);//To create a student prototype
 //Note: new Person() is a wrong way to create prototype.
